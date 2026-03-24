@@ -35,16 +35,132 @@ async function sendPartnerAnfrage(){
 }
 
 // ── TERMIN ──
-async function openTerminModal(kontext){
-  document.getElementById('termin-modal-sub').textContent='Gespräch zu: '+kontext;
-  const list=document.getElementById('termin-slots-list');
-  list.innerHTML='<div style="font-size:13px;color:var(--brown)">Lade...</div>';
+async function openTerminModal(kontext) {
+  document.getElementById('termin-modal-sub').textContent = 'Gespräch zu: ' + kontext;
+  const list = document.getElementById('termin-slots-list');
+  list.innerHTML = '<div style="font-size:13px;color:var(--brown)">Lade...</div>';
+
   openModal('termin');
-  const{data}=await sb.from('gespraechstermine').select('*').eq('gebucht',false).gte('datum',new Date().toISOString().split('T')[0]).order('datum').limit(10);
-  if(!data||!data.length){list.innerHTML='<div style="font-size:13px;color:var(--brown)">Keine freien Termine. Bitte per Email anfragen.</div>';return;}
-  list.innerHTML=data.map(t=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--cream);border-radius:10px;margin-bottom:8px;border:1px solid var(--border)"><div><div style="font-size:14px;font-weight:500">📅 ${new Date(t.datum+'T00:00').toLocaleDateString('de-DE',{weekday:'long',day:'2-digit',month:'long'})} · ${t.zeit} Uhr</div><div style="font-size:12px;color:var(--brown)">${t.typ==='gemeinde'?'Gemeinde-Gespräch':t.typ==='partner'?'Partner-Gespräch':'Demo-Call'}</div></div><button onclick="bucheTermin('${t.id}','${kontext}')" style="background:var(--green);color:#fff;border:none;padding:8px 16px;border-radius:9px;font-size:12px;cursor:pointer;font-family:inherit">Buchen</button></div>`).join('');
+
+  const { data } = await sb
+    .from('gespraechstermine')
+    .select('*')
+    .eq('gebucht', false)
+    .gte('datum', new Date().toISOString().split('T')[0])
+    .order('datum')
+    .limit(10);
+
+  if (!data || !data.length) {
+    list.innerHTML =
+      '<div style="font-size:13px;color:var(--brown)">Keine Termine frei. Bitte per Email anfragen.</div>';
+    return;
+  }
+
+  list.innerHTML = data
+    .map(
+      (t) => `
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:var(--cream);border-radius:10px;margin-bottom:8px;border:1px solid var(--border)">
+        <div>
+          <div style="font-size:14px;font-weight:500">
+            📅 ${new Date(t.datum).toLocaleDateString('de-DE', {
+              weekday: 'long',
+              day: '2-digit',
+              month: 'long'
+            })} · ${t.zeit} Uhr
+          </div>
+          <div style="font-size:12px;color:var(--brown)">
+            ${
+              t.typ === 'gemeinde'
+                ? 'Gemeinde-Gespräch'
+                : t.typ === 'partner'
+                ? 'Partner-Gespräch'
+                : 'Demo-Call'
+            }
+          </div>
+        </div>
+        <button
+          onclick="bucheTermin('${t.id}','${kontext}')"
+          style="background:var(--green);color:#fff;border:none;padding:8px 16px;border-radius:9px;font-size:12px;cursor:pointer;font-family:inherit"
+        >
+          Buchen
+        </button>
+      </div>
+    `
+    )
+    .join('');
 }
-async function bucheTermin(terminId,kontext){
-  const name=prompt('Ihr Name:');const email=prompt('Ihre Email:');
-  if(!name||!email)return;
-  await sb.from('gespraechstermine').update({gebucht:true,gebucht_von_n
+
+async function bucheTermin(terminId, kontext) {
+  const name = prompt('Ihr Name:');
+  const email = prompt('Ihre Email:');
+
+  if (!name || !email) return;
+
+  await sb
+    .from('gespraechstermine')
+    .update({
+      gebucht: true,
+      gebucht_von_name: name,
+      gebucht_von_email: email,
+      kontext: kontext
+    })
+    .eq('id', terminId);
+
+  window.location.href =
+    `mailto:Lucas-wimmer@hotmail.de?subject=Civico Termin gebucht&body=Von: ${encodeURIComponent(name)} (${encodeURIComponent(email)})%0AKontext: ${encodeURIComponent(kontext)}`;
+
+  closeModal('termin');
+  toast('✓ Termin gebucht!');
+}
+
+// ── GEMEINDE LOGIN (from verein-login page) ──
+async function doGemeindeLoginForm() {
+  const email = document.getElementById('g-email').value.trim();
+  const pw = document.getElementById('g-pw').value;
+  const errEl = document.getElementById('g-err');
+  const btn = document.getElementById('g-btn');
+
+  errEl.style.display = 'none';
+
+  if (!email || !pw) {
+    errEl.textContent = 'Email und Passwort eingeben.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  btn.textContent = 'Laden...';
+  btn.disabled = true;
+
+  try {
+    const { data, error } = await sb.auth.signInWithPassword({
+      email,
+      password: pw
+    });
+
+    if (error) throw error;
+
+    window.location.href = 'gemeinde.html';
+  } catch (e) {
+    errEl.textContent = e.message || 'Fehler beim Login.';
+    errEl.style.display = 'block';
+  }
+
+  btn.textContent = 'Anmelden →';
+  btn.disabled = false;
+}
+
+// ── SESSION RESTORE ──
+sb.auth.getSession().then(async ({ data: { session } }) => {
+  if (!session) return;
+
+  const { data: v } = await sb
+    .from('vereine')
+    .select('*')
+    .eq('auth_id', session.user.id)
+    .single();
+
+  if (v) {
+    startDash(v);
+    return;
+  }
+});
