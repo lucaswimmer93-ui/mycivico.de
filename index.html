@@ -913,7 +913,7 @@
         <li>Warteliste & Benachrichtigungen</li>
         <li>Analyse-Dashboard</li>
       </ul>
-      <a href="mailto:Lucas-wimmer@hotmail.de?subject=Civico Gemeinde Anfrage" class="price-cta">Angebot anfragen</a>
+      <button onclick="openAnfrageModal('gemeinde')" class="price-cta">Angebot anfragen</button>
     </div>
     <div class="price-card featured">
       <div class="price-badge">Empfohlen</div>
@@ -926,7 +926,7 @@
         <li>Erweiterte Analysen</li>
         <li>Priorisierter Support</li>
       </ul>
-      <a href="mailto:Lucas-wimmer@hotmail.de?subject=Civico Verbände Anfrage" class="price-cta">Gespräch vereinbaren</a>
+      <button onclick="openAnfrageModal('verband')" class="price-cta">Gespräch vereinbaren</button>
     </div>
     <div class="price-card">
       <div class="price-icon">🤝</div>
@@ -1018,7 +1018,98 @@
   </div>
 </div>
 
+<!-- KONTAKT MODAL -->
+<div class="modal-overlay" id="modal-anfrage">
+  <div class="modal" style="max-width:500px">
+    <button class="modal-close" onclick="closeModal('anfrage')">×</button>
+    <h2 id="anfrage-titel">Anfrage senden</h2>
+    <p class="modal-p" id="anfrage-sub">Wir melden uns innerhalb von 24 Stunden.</p>
+    <input type="hidden" id="anfrage-typ" value="kontakt">
+    <input class="m-inp" id="af-name" placeholder="Dein Name *">
+    <input class="m-inp" id="af-email" type="email" placeholder="E-Mail *">
+    <input class="m-inp" id="af-org" placeholder="Verein / Gemeinde / Organisation (opt.)">
+    <input class="m-inp" id="af-tel" placeholder="Telefon (optional)">
+    <textarea class="m-inp" id="af-msg" rows="4" placeholder="Deine Nachricht..."></textarea>
+    <div class="m-err" id="af-err"></div>
+    <button class="m-btn m-btn-gold" id="af-btn" onclick="submitAnfrage()">Anfrage senden →</button>
+    <div style="font-size:11px;color:var(--brown);margin-top:10px;text-align:center">Deine Daten werden nur zur Bearbeitung deiner Anfrage verwendet.</div>
+  </div>
+</div>
+
 </div>
 <script src="assets/script.js"></script>
+<script>
+const SUPA_URL = 'https://fowlmllbyjkbedhisceo.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvd2xtbGxieWprYmVkaGlzY2VvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5MTkzNjQsImV4cCI6MjA4OTQ5NTM2NH0.uNBcVHHfKg7C56iQhxfu9SJ1V1XCACsuiYvy6JfR6jw';
+
+const ANFRAGE_LABELS = {
+  gemeinde: { titel: 'Anfrage für Gemeinden', sub: 'Wir melden uns innerhalb von 24 Stunden.' },
+  verband:  { titel: 'Gespräch vereinbaren', sub: 'Für Wohlfahrtsverbände und überregionale Organisationen.' },
+  partner:  { titel: 'Partner & Sponsoring', sub: 'Unterstütze Ehrenamt und werde regional sichtbar.' },
+  kontakt:  { titel: 'Kontakt aufnehmen', sub: 'Wir melden uns innerhalb von 24 Stunden.' },
+  verein:   { titel: 'Anfrage für Vereine', sub: 'Fragen zur Nutzung, Einrichtung oder Kosten.' },
+};
+
+function openAnfrageModal(typ) {
+  document.getElementById('anfrage-typ').value = typ;
+  const l = ANFRAGE_LABELS[typ] || ANFRAGE_LABELS.kontakt;
+  document.getElementById('anfrage-titel').textContent = l.titel;
+  document.getElementById('anfrage-sub').textContent = l.sub;
+  ['af-name','af-email','af-org','af-tel','af-msg'].forEach(id => {
+    const el = document.getElementById(id); if(el) el.value = '';
+  });
+  document.getElementById('af-err').style.display = 'none';
+  document.getElementById('af-btn').textContent = 'Anfrage senden →';
+  document.getElementById('af-btn').disabled = false;
+  openModal('anfrage');
+}
+
+async function submitAnfrage() {
+  const name = document.getElementById('af-name').value.trim();
+  const email = document.getElementById('af-email').value.trim();
+  const org = document.getElementById('af-org').value.trim();
+  const tel = document.getElementById('af-tel').value.trim();
+  const msg = document.getElementById('af-msg').value.trim();
+  const typ = document.getElementById('anfrage-typ').value;
+  const errEl = document.getElementById('af-err');
+  const btn = document.getElementById('af-btn');
+
+  if (!name || !email) {
+    errEl.textContent = 'Bitte Name und E-Mail angeben.';
+    errEl.style.display = 'block';
+    return;
+  }
+  btn.textContent = 'Wird gesendet...';
+  btn.disabled = true;
+  errEl.style.display = 'none';
+
+  try {
+    const res = await fetch(`${SUPA_URL}/rest/v1/website_anfragen`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPA_KEY,
+        'Authorization': `Bearer ${SUPA_KEY}`,
+        'Prefer': 'return=minimal',
+      },
+      body: JSON.stringify({
+        typ, name, email,
+        organisation: org || null,
+        telefon: tel || null,
+        nachricht: msg || null,
+        gelesen: false
+      }),
+    });
+    if (!res.ok) throw new Error('Fehler beim Senden.');
+    closeModal('anfrage');
+    toast('✓ Anfrage gesendet! Wir melden uns bald.');
+  } catch(e) {
+    errEl.textContent = 'Fehler beim Senden. Bitte direkt: Lucaswimmer@mycivico.de';
+    errEl.style.display = 'block';
+    btn.textContent = 'Anfrage senden →';
+    btn.disabled = false;
+  }
+}
+</script>
 </body>
 </html>
