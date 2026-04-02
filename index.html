@@ -338,19 +338,35 @@
 }
 
 /* ── RESPONSIVE ── */
+@media(max-width: 1024px) {
+  .hero-photo-content { gap: 24px; padding: 0 5%; }
+  .pm-shell { width: 190px; }
+  .pm-screen { height: 360px; }
+}
 @media(max-width: 900px) {
   .hero-photo-content { flex-direction: column; padding: 30px 5% 50px; gap: 30px; min-height: auto; }
   .hero-photo-left h1 { font-size: clamp(38px, 9vw, 60px); }
-  .hero-photo-left { padding: 40px 0 0; }
+  .hero-photo-left { padding: 40px 0 0; max-width: 100%; }
   .phone-mockup { width: 100%; display:flex; justify-content:center; }
-  .pm-shell { width: 200px; }
-  .pm-screen { height: 340px; }
+  .pm-shell { width: 210px; }
+  .pm-screen { height: 370px; }
   .trust-items { gap: 20px; }
+  .hero-checks { display: none; } /* Zu lang auf Tablet – spare Platz */
 }
 @media(max-width: 600px) {
   .hero-photo-bg { background-position: 70% 20%; }
-  .trust-bar { flex-direction: column; align-items: flex-start; }
-  .logo-trust-icons { gap: 28px; }
+  .hero-photo-left h1 { font-size: clamp(32px, 10vw, 52px); }
+  .hero-photo-left p { font-size: 14px; }
+  .hero-cta-row { flex-direction: column; gap: 10px; }
+  .hero-cta-primary, .hero-cta-ghost { width: 100%; text-align: center; justify-content: center; }
+  .hero-badge { font-size: 9px; padding: 5px 12px; }
+  .trust-bar { flex-direction: column; align-items: flex-start; padding: 16px 5%; }
+  .trust-items { gap: 14px; flex-direction: column; }
+  .trust-text-sub { display: none; }
+  .logo-trust-icons { gap: 20px; }
+  .logo-trust-row { padding: 32px 5%; }
+  .pm-shell { width: 180px; }
+  .pm-screen { height: 340px; }
 }
 </style>
 </head>
@@ -374,8 +390,122 @@
     <div style="display:flex;gap:10px;align-items:center">
       <button class="nav-cta" style="background:transparent;border:1px solid rgba(200,169,110,0.35);color:rgba(200,169,110,0.8)" onclick="window.location.href='https://app.mycivico.de'">Anmelden</button>
       <button class="nav-cta" onclick="window.location.href='https://app.mycivico.de'">Kostenlos starten</button>
+      <button class="nav-burger" onclick="toggleMenu()" id="burgerBtn" aria-label="Menü">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="gemeinde.html?demo=1" onclick="toggleMenu()">Für Gemeinden</a>
+    <a href="verein.html?demo=1" onclick="toggleMenu()">Für Vereine</a>
+    <a href="#wie-es-funktioniert" onclick="toggleMenu()">Funktionen</a>
+    <a href="#preise" onclick="toggleMenu()">Preise</a>
+    <a href="#faq" onclick="toggleMenu()">Über uns</a>
+    <div class="mobile-menu-divider"></div>
+    <a href="https://app.mycivico.de" onclick="toggleMenu()" class="mobile-menu-btn-ghost">Anmelden</a>
+    <a href="https://app.mycivico.de" onclick="toggleMenu()" class="mobile-menu-btn-gold">Kostenlos starten →</a>
+  </div>
+
+  <style>
+  .nav-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 1px solid rgba(200,169,110,0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 7px;
+  }
+  .nav-burger span {
+    display: block;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: all .3s ease;
+  }
+  .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-burger.open span:nth-child(2) { opacity: 0; }
+  .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0;
+    background: rgba(14,10,4,0.98);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(200,169,110,0.15);
+    padding: 20px 6%;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 99;
+    animation: menuSlide .25s ease;
+  }
+  @keyframes menuSlide {
+    from { opacity:0; transform:translateY(-10px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: rgba(200,180,140,0.85);
+    text-decoration: none;
+    font-size: 16px;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(200,169,110,0.08);
+    transition: color .2s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-menu-divider { height: 1px; background: rgba(200,169,110,0.15); margin: 8px 0; }
+  .mobile-menu-btn-ghost {
+    border: 1px solid rgba(200,169,110,0.3) !important;
+    border-radius: 24px !important;
+    text-align: center;
+    padding: 12px !important;
+    margin-top: 4px;
+    border-bottom: none !important;
+  }
+  .mobile-menu-btn-gold {
+    background: var(--gold) !important;
+    color: #1A1208 !important;
+    border-radius: 24px !important;
+    text-align: center;
+    padding: 13px !important;
+    font-weight: 500;
+    border-bottom: none !important;
+  }
+
+  @media(max-width: 768px) {
+    .nav-burger { display: flex; }
+    .nav-links { display: none !important; }
+    nav > div:first-of-type .nav-cta:not(:last-child) { display: none; }
+    /* Hide the two nav CTAs, keep only burger */
+    nav > div:last-child > button:not(.nav-burger) { display: none; }
+  }
+  </style>
+
+  <script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('burgerBtn');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+  // Close on outside click
+  document.addEventListener('click', e => {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('burgerBtn');
+    if (menu && !menu.contains(e.target) && !btn.contains(e.target)) {
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+    }
+  });
+  </script>
 
   <div class="hero-photo-content">
     <div class="hero-photo-left">
