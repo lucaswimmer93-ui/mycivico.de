@@ -480,12 +480,15 @@
     border-bottom: none !important;
   }
 
-  @media(max-width: 768px) {
+@media(max-width: 768px) {
     .nav-burger { display: flex; }
     .nav-links { display: none !important; }
     nav > div:first-of-type .nav-cta:not(:last-child) { display: none; }
     /* Hide the two nav CTAs, keep only burger */
     nav > div:last-child > button:not(.nav-burger) { display: none; }
+    /* Features grid mobile */
+    #wie-es-funktioniert > div[style*="grid-template-columns:repeat(3"] { grid-template-columns: 1fr !important; }
+    #wie-es-funktioniert > div[style*="display:flex;gap:12px"] { flex-direction: column !important; }
   }
   </style>
 
@@ -784,14 +787,90 @@
   </div>
 </section>
 
-<!-- WIE ES FUNKTIONIERT -->
-<section class="section" id="wie-es-funktioniert">
-  <div class="section-tag">So einfach</div>
-  <h2 class="section-title">In 3 Schritten zum <em>Ehrenamt</em></h2>
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Gemeinde registriert sich</div><div class="step-desc">Die Gemeinde legt ein Konto an und lädt ihre Vereine per Einladungslink ein.</div></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Vereine schreiben Stellen aus</div><div class="step-desc">Vereine erstellen Ehrenamtsstellen mit Terminen und Beschreibung – in unter 2 Minuten.</div></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Freiwillige melden sich an</div><div class="step-desc">Freiwillige entdecken Stellen in ihrem Umkreis und werden automatisch verwaltet.</div></div></div>
+<!-- FUNKTIONEN -->
+<section class="section" id="wie-es-funktioniert" style="background:var(--cream2)">
+  <div class="section-tag">Funktionen</div>
+  <h2 class="section-title">Alles was du brauchst – <em>an einem Ort</em></h2>
+  <p class="section-sub" style="margin-bottom:48px">Civico ist mehr als ein Kalender. Es ist die komplette Infrastruktur für dein Ehrenamt.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+
+    <div style="background:#fff;border:1px solid var(--border);border-radius:18px;padding:28px">
+      <div style="font-size:30px;margin-bottom:14px">📋</div>
+      <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--text);margin-bottom:8px">Stellen & Einsätze</div>
+      <div style="font-size:13px;color:var(--brown);line-height:1.8">
+        Ehrenamtsstellen mit Terminen, Plätzen und Kategorien anlegen. Warteliste füllt freie Plätze automatisch nach. Einsätze verschieben oder absagen mit einem Klick.
+      </div>
+    </div>
+
+    <div style="background:#fff;border:1px solid var(--border);border-radius:18px;padding:28px">
+      <div style="font-size:30px;margin-bottom:14px">👥</div>
+      <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--text);margin-bottom:8px">Anmeldungen im Blick</div>
+      <div style="font-size:13px;color:var(--brown);line-height:1.8">
+        Alle Anmeldungen auf einen Blick. Wer kommt, wer hat abgesagt, wer ist nicht erschienen. Anwesenheit mit einem Klick bestätigen oder als No-Show markieren.
+      </div>
+    </div>
+
+    <div style="background:#fff;border:1px solid var(--border);border-radius:18px;padding:28px">
+      <div style="font-size:30px;margin-bottom:14px">🔔</div>
+      <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--text);margin-bottom:8px">Push-Benachrichtigungen</div>
+      <div style="font-size:13px;color:var(--brown);line-height:1.8">
+        Vereine erhalten sofort eine Nachricht wenn sich jemand an- oder abmeldet. Freiwillige bekommen automatische Terminerinnerungen – kein Vergessen mehr.
+      </div>
+    </div>
+
+    <div style="background:#fff;border:1px solid var(--border);border-radius:18px;padding:28px">
+      <div style="font-size:30px;margin-bottom:14px">💬</div>
+      <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--text);margin-bottom:8px">Integrierte Kommunikation</div>
+      <div style="font-size:13px;color:var(--brown);line-height:1.8">
+        Direktnachrichten zwischen Freiwilligen und Vereinen. Vereine können mit ihrer Gemeinde kommunizieren. Und alle können Civico direkt kontaktieren – alles auf einer Plattform.
+      </div>
+    </div>
+
+    <div style="background:#fff;border:1px solid var(--border);border-radius:18px;padding:28px">
+      <div style="font-size:30px;margin-bottom:14px">📊</div>
+      <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--text);margin-bottom:8px">Analyse & Berichte</div>
+      <div style="font-size:13px;color:var(--brown);line-height:1.8">
+        Erscheinensquote, Aufrufe, Anmeldungen und geleistete Stunden auf einen Blick. Ideal für CSR-Berichte, Jahresberichte und Förderanträge.
+      </div>
+    </div>
+
+    <div style="background:var(--dark);border:1px solid var(--dark);border-radius:18px;padding:28px">
+      <div style="font-size:30px;margin-bottom:14px">🏛️</div>
+      <div style="font-family:'Playfair Display',serif;font-size:17px;color:var(--cream);margin-bottom:8px">Gemeinde-Dashboard</div>
+      <div style="font-size:13px;color:var(--brown);line-height:1.8">
+        Gemeinden erhalten auf Anfrage Zugang zu einem eigenen Dashboard. Überblick über alle Vereine, Einsätze und Freiwilligen in der Gemeinde – zentral und digital.
+      </div>
+      <div style="margin-top:16px">
+        <a href="mailto:Lucaswimmer@mycivico.de?subject=Gemeinde-Anfrage" style="font-size:12px;color:var(--gold);text-decoration:none">Jetzt anfragen →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Sprachen + DSGVO Zeile -->
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;align-items:stretch">
+    <div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;align-items:center;gap:14px">
+      <div style="font-size:24px">🌍</div>
+      <div>
+        <div style="font-size:13px;font-weight:500;color:var(--text)">5 Sprachen</div>
+        <div style="font-size:12px;color:var(--brown)">Deutsch · English · Türkçe · Русский · Polski</div>
+      </div>
+    </div>
+    <div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;align-items:center;gap:14px">
+      <div style="font-size:24px">🔒</div>
+      <div>
+        <div style="font-size:13px;font-weight:500;color:var(--text)">DSGVO-konform</div>
+        <div style="font-size:12px;color:var(--brown)">EU-Server · Supabase Frankfurt · Keine Tracker</div>
+      </div>
+    </div>
+    <div style="flex:1;min-width:200px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;align-items:center;gap:14px">
+      <div style="font-size:24px">📱</div>
+      <div>
+        <div style="font-size:13px;font-weight:500;color:var(--text)">Auf jedem Gerät</div>
+        <div style="font-size:12px;color:var(--brown)">PWA · Kein App-Download nötig · Homescreen-fähig</div>
+      </div>
+    </div>
   </div>
 </section>
 
