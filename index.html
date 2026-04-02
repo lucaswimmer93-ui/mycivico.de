@@ -385,6 +385,7 @@
       <a href="verein.html?demo=1">Für Vereine</a>
       <a href="#wie-es-funktioniert">Funktionen</a>
       <a href="#preise">Preise</a>
+      <a href="#so-tickt-civico">So tickt Civico</a>
       <a href="#faq">Über uns</a>
     </div>
     <div style="display:flex;gap:10px;align-items:center">
@@ -402,6 +403,7 @@
     <a href="verein.html?demo=1" onclick="toggleMenu()">Für Vereine</a>
     <a href="#wie-es-funktioniert" onclick="toggleMenu()">Funktionen</a>
     <a href="#preise" onclick="toggleMenu()">Preise</a>
+    <a href="#so-tickt-civico" onclick="toggleMenu()">So tickt Civico</a>
     <a href="#faq" onclick="toggleMenu()">Über uns</a>
     <div class="mobile-menu-divider"></div>
     <a href="https://app.mycivico.de" onclick="toggleMenu()" class="mobile-menu-btn-ghost">Anmelden</a>
@@ -942,6 +944,69 @@
     </div>
   </div>
 </section>
+
+<!-- SO TICKT CIVICO -->
+<section class="section" id="so-tickt-civico" style="background:var(--dark)">
+  <div class="section-tag" style="color:var(--gold)">So tickt Civico</div>
+  <h2 class="section-title" style="color:var(--cream);max-width:600px">Die Haltung hinter <em>der Plattform</em></h2>
+  <div id="stc-content">
+    <!-- Wird aus Supabase geladen, Fallback unten -->
+    <div id="stc-loading" style="color:var(--brown);font-size:14px">Inhalte werden geladen...</div>
+  </div>
+</section>
+
+<style>
+.stc-block {
+  max-width: 680px;
+  margin-bottom: 44px;
+}
+.stc-block-titel {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--gold);
+  margin-bottom: 14px;
+  font-style: italic;
+}
+.stc-block-text {
+  font-size: 16px;
+  color: #C4B89A;
+  line-height: 1.85;
+  white-space: pre-wrap;
+}
+</style>
+
+<script>
+(async function loadSoTicktCivico() {
+  const SUPA_URL = 'https://fowlmllbyjkbedhisceo.supabase.co';
+  const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvd2xtbGxieWprYmVkaGlzY2VvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5MTkzNjQsImV4cCI6MjA4OTQ5NTM2NH0.uNBcVHHfKg7C56iQhxfu9SJ1V1XCACsuiYvy6JfR6jw';
+
+  const fallback = [
+    { titel: 'Woher die Idee kommt', text: 'Dieser Text kommt bald. Lucas schreibt ihn gerade im Admin-Bereich.' },
+  ];
+
+  try {
+    const res = await fetch(
+      `${SUPA_URL}/rest/v1/civico_content?seite=eq.so_tickt_civico&order=reihenfolge.asc`,
+      { headers: { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` } }
+    );
+    const data = await res.json();
+    const blocks = (data && data.length > 0) ? data : fallback;
+    renderSTC(blocks);
+  } catch(e) {
+    renderSTC(fallback);
+  }
+
+  function renderSTC(blocks) {
+    const container = document.getElementById('stc-content');
+    container.innerHTML = blocks.map(b => `
+      <div class="stc-block">
+        <div class="stc-block-titel">${b.titel}</div>
+        <div class="stc-block-text">${b.text || ''}</div>
+      </div>
+    `).join('');
+  }
+})();
+</script>
 
 <!-- FAQ -->
 <section class="section" id="faq">
