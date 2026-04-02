@@ -342,7 +342,9 @@
   .hero-photo-content { flex-direction: column; padding: 30px 5% 50px; gap: 30px; min-height: auto; }
   .hero-photo-left h1 { font-size: clamp(38px, 9vw, 60px); }
   .hero-photo-left { padding: 40px 0 0; }
-  .hero-widget { width: 100%; max-width: 320px; }
+  .phone-mockup { width: 100%; display:flex; justify-content:center; }
+  .pm-shell { width: 200px; }
+  .pm-screen { height: 340px; }
   .trust-items { gap: 20px; }
 }
 @media(max-width: 600px) {
@@ -473,12 +475,31 @@
                 <div style="flex:1;border:1px solid #E85C5C;border-radius:5px;padding:4px;font-size:7px;text-align:center;color:#E85C5C">✕ Absagen</div>
               </div>
               <div style="font-size:7px;color:#8B7355;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">ANGEMELDETE (17)</div>
-              ${['Lucas Wimmer','Anna Müller','Thomas Becker','Sabine Klein','Max Hofmann'].map(n=>`
-                <div style="display:flex;align-items:center;gap:5px;padding:4px 0;border-bottom:1px solid #F0EBE0">
-                  <div style="width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#3D3020,#5A4830);display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0">👤</div>
-                  <div style="font-size:8px;color:#2C2416;flex:1">${n}</div>
-                  <span style="font-size:9px;color:#8B7355">›</span>
-                </div>`).join('')}
+              <div style="display:flex;align-items:center;gap:5px;padding:4px 0;border-bottom:1px solid #F0EBE0">
+                <div style="width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#3D3020,#5A4830);display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0">👤</div>
+                <div style="font-size:8px;color:#2C2416;flex:1">Lucas Wimmer</div>
+                <span style="font-size:9px;color:#8B7355">›</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:5px;padding:4px 0;border-bottom:1px solid #F0EBE0">
+                <div style="width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#3D3020,#5A4830);display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0">👤</div>
+                <div style="font-size:8px;color:#2C2416;flex:1">Anna Müller</div>
+                <span style="font-size:9px;color:#8B7355">›</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:5px;padding:4px 0;border-bottom:1px solid #F0EBE0">
+                <div style="width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#3D3020,#5A4830);display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0">👤</div>
+                <div style="font-size:8px;color:#2C2416;flex:1">Thomas Becker</div>
+                <span style="font-size:9px;color:#8B7355">›</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:5px;padding:4px 0;border-bottom:1px solid #F0EBE0">
+                <div style="width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#3D3020,#5A4830);display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0">👤</div>
+                <div style="font-size:8px;color:#2C2416;flex:1">Sabine Klein</div>
+                <span style="font-size:9px;color:#8B7355">›</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:5px;padding:4px 0">
+                <div style="width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#3D3020,#5A4830);display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0">👤</div>
+                <div style="font-size:8px;color:#2C2416;flex:1">Max Hofmann</div>
+                <span style="font-size:9px;color:#8B7355">›</span>
+              </div>
             </div>
           </div>
 
@@ -522,6 +543,10 @@
         </div>
       </div>
     </div>
+    <script>
+    let currentSlide = 0;
+    const totalSlides = 3;
+    let autoTimer;
     function goToSlide(n) {
       document.querySelectorAll('.pm-slide').forEach((s,i) => s.classList.toggle('active', i===n));
       document.querySelectorAll('.pm-dot').forEach((d,i) => d.classList.toggle('active', i===n));
