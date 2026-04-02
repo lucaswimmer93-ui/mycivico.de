@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>So tickt Civico</title>
+<meta name="description" content="Die Haltung und Geschichte hinter Civico – warum diese Plattform existiert und wer dahintersteckt.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.stc-hero{background:linear-gradient(160deg,var(--dark) 0%,var(--dark2) 70%,#3D3020 100%);padding:120px 7% 80px;min-height:40vh;display:flex;align-items:flex-end;}
+.stc-hero-inner{max-width:700px;}
+.stc-hero-tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.stc-hero h1{font-family:'Playfair Display',serif;font-size:clamp(38px,6vw,64px);color:var(--cream);line-height:1.1;margin-bottom:20px;}
+.stc-hero h1 em{color:var(--gold);font-style:italic;}
+.stc-hero-sub{font-size:17px;color:var(--brown);line-height:1.7;max-width:520px;}
+.stc-content{max-width:700px;margin:0 auto;padding:80px 7%;}
+.stc-block{margin-bottom:60px;}
+.stc-block-titel{font-family:'Playfair Display',serif;font-size:26px;color:var(--text);margin-bottom:18px;font-style:italic;}
+.stc-block-text{font-size:16px;color:var(--brown);line-height:1.9;white-space:pre-wrap;}
+.stc-divider{width:48px;height:2px;background:var(--gold);border-radius:1px;margin:48px 0;opacity:0.5;}
+.stc-empty{background:var(--cream2);border:1px dashed var(--border);border-radius:16px;padding:48px;text-align:center;color:var(--brown);}
+.stc-empty-icon{font-size:36px;margin-bottom:12px;}
+.stc-empty-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--text);margin-bottom:8px;}
+.stc-empty-sub{font-size:14px;line-height:1.7;}
+@media(max-width:768px){.stc-hero{padding:100px 5% 60px;}.stc-content{padding:48px 5%;}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+
+<nav>
+  <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor:pointer">Civico</div>
+  <div class="nav-links">
+    <a href="index.html#wie-es-funktioniert">Funktionen</a>
+    <a href="index.html#preise">Preise</a>
+    <a href="sotickts.html" style="color:var(--gold)">So tickt Civico</a>
+    <a href="index.html#faq">FAQ</a>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center">
+    <button class="nav-cta" style="background:transparent;border:1px solid rgba(200,169,110,0.35);color:rgba(200,169,110,0.8)" onclick="window.location.href='https://app.mycivico.de'">Anmelden</button>
+    <button class="nav-cta" onclick="window.location.href='https://app.mycivico.de'">Kostenlos starten</button>
+  </div>
+</nav>
+
+<div class="stc-hero">
+  <div class="stc-hero-inner">
+    <div class="stc-hero-tag">So tickt Civico</div>
+    <h1>Die Haltung hinter <em>der Plattform</em></h1>
+    <p class="stc-hero-sub">Was Civico antreibt, wer dahintersteckt – und warum das hier kein Startup aus dem Silicon Valley ist.</p>
+  </div>
+</div>
+
+<div class="stc-content" id="stc-page-content">
+  <div style="text-align:center;padding:40px 0;color:var(--brown)">
+    <div style="font-size:24px;margin-bottom:8px">⏳</div>
+    Wird geladen...
+  </div>
+</div>
+
+<div style="background:var(--cream2);border-top:1px solid var(--border);padding:40px 7%;text-align:center">
+  <a href="index.html" style="color:var(--brown);text-decoration:none;font-size:14px">← Zurück zur Startseite</a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Civico</div>
+    <div class="footer-links">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="agb.html">AGB</a>
+      <a href="mailto:Lucaswimmer@mycivico.de">Kontakt</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2025 Civico – Lucas Wimmer, Einhausen. Alle Rechte vorbehalten.</div>
+</footer>
+
+<script>
+const SUPA_URL = 'https://fowlmllbyjkbedhisceo.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvd2xtbGxieWprYmVkaGlzY2VvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5MTkzNjQsImV4cCI6MjA4OTQ5NTM2NH0.uNBcVHHfKg7C56iQhxfu9SJ1V1XCACsuiYvy6JfR6jw';
+
+(async function() {
+  const container = document.getElementById('stc-page-content');
+  try {
+    const res = await fetch(
+      `${SUPA_URL}/rest/v1/civico_content?seite=eq.so_tickt_civico&order=reihenfolge.asc`,
+      { headers: { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` } }
+    );
+    const data = await res.json();
+    if (data && data.length > 0) {
+      container.innerHTML = data.map((b, i) => `
+        <div class="stc-block">
+          <div class="stc-block-titel">${b.titel}</div>
+          <div class="stc-block-text">${b.text || ''}</div>
+        </div>
+        ${i < data.length - 1 ? '<div class="stc-divider"></div>' : ''}
+      `).join('');
+    } else {
+      container.innerHTML = `
+        <div class="stc-empty">
+          <div class="stc-empty-icon">✍️</div>
+          <div class="stc-empty-title">Kommt bald</div>
+          <div class="stc-empty-sub">Lucas schreibt gerade die Geschichte hinter Civico.<br>Schau bald nochmal vorbei.</div>
+        </div>`;
+    }
+  } catch(e) {
+    container.innerHTML = `
+      <div class="stc-empty">
+        <div class="stc-empty-icon">✍️</div>
+        <div class="stc-empty-title">Kommt bald</div>
+        <div class="stc-empty-sub">Schau bald nochmal vorbei.</div>
+      </div>`;
+  }
+})();
+
+function toast(msg,color){const el=document.getElementById('toast');el.textContent=msg;el.style.background=color||'#2C2416';el.classList.add('show');setTimeout(()=>el.classList.remove('show'),3000);}
+</script>
+</body>
+</html>

@@ -945,65 +945,43 @@
   </div>
 </section>
 
-<!-- SO TICKT CIVICO -->
+<!-- SO TICKT CIVICO – TEASER -->
 <section class="section" id="so-tickt-civico" style="background:var(--dark)">
   <div class="section-tag" style="color:var(--gold)">So tickt Civico</div>
   <h2 class="section-title" style="color:var(--cream);max-width:600px">Die Haltung hinter <em>der Plattform</em></h2>
-  <div id="stc-content">
-    <!-- Wird aus Supabase geladen, Fallback unten -->
-    <div id="stc-loading" style="color:var(--brown);font-size:14px">Inhalte werden geladen...</div>
+  <div id="stc-teaser" style="max-width:620px">
+    <div id="stc-teaser-text" style="font-size:17px;color:#C4B89A;line-height:1.85;margin-bottom:32px">
+      Inhalte werden geladen...
+    </div>
+    <a href="sotickts.html" style="display:inline-flex;align-items:center;gap:10px;background:transparent;border:1px solid rgba(200,169,110,0.4);color:var(--gold);padding:14px 28px;border-radius:32px;font-size:15px;text-decoration:none;transition:all .2s">
+      Mehr erfahren →
+    </a>
   </div>
 </section>
 
-<style>
-.stc-block {
-  max-width: 680px;
-  margin-bottom: 44px;
-}
-.stc-block-titel {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  color: var(--gold);
-  margin-bottom: 14px;
-  font-style: italic;
-}
-.stc-block-text {
-  font-size: 16px;
-  color: #C4B89A;
-  line-height: 1.85;
-  white-space: pre-wrap;
-}
-</style>
-
 <script>
-(async function loadSoTicktCivico() {
+(async function loadSTCTeaser() {
   const SUPA_URL = 'https://fowlmllbyjkbedhisceo.supabase.co';
   const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvd2xtbGxieWprYmVkaGlzY2VvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5MTkzNjQsImV4cCI6MjA4OTQ5NTM2NH0.uNBcVHHfKg7C56iQhxfu9SJ1V1XCACsuiYvy6JfR6jw';
 
-  const fallback = [
-    { titel: 'Woher die Idee kommt', text: 'Dieser Text kommt bald. Lucas schreibt ihn gerade im Admin-Bereich.' },
-  ];
-
   try {
     const res = await fetch(
-      `${SUPA_URL}/rest/v1/civico_content?seite=eq.so_tickt_civico&order=reihenfolge.asc`,
+      `${SUPA_URL}/rest/v1/civico_content?seite=eq.so_tickt_civico&order=reihenfolge.asc&limit=1`,
       { headers: { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` } }
     );
     const data = await res.json();
-    const blocks = (data && data.length > 0) ? data : fallback;
-    renderSTC(blocks);
+    const el = document.getElementById('stc-teaser-text');
+    if (data && data.length > 0 && data[0].text) {
+      // Show max ~200 chars as teaser
+      const full = data[0].text;
+      const teaser = full.length > 200 ? full.substring(0, 200).trim() + ' ...' : full;
+      el.textContent = teaser;
+    } else {
+      el.textContent = 'Civico kommt nicht aus einem Startup-Inkubator. Es kommt aus Einhausen – und aus der Überzeugung, dass Ehrenamt bessere Werkzeuge verdient.';
+    }
   } catch(e) {
-    renderSTC(fallback);
-  }
-
-  function renderSTC(blocks) {
-    const container = document.getElementById('stc-content');
-    container.innerHTML = blocks.map(b => `
-      <div class="stc-block">
-        <div class="stc-block-titel">${b.titel}</div>
-        <div class="stc-block-text">${b.text || ''}</div>
-      </div>
-    `).join('');
+    document.getElementById('stc-teaser-text').textContent =
+      'Civico kommt nicht aus einem Startup-Inkubator. Es kommt aus Einhausen – und aus der Überzeugung, dass Ehrenamt bessere Werkzeuge verdient.';
   }
 })();
 </script>
