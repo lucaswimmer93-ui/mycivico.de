@@ -172,141 +172,93 @@
   margin-top: 12px;
 }
 
-/* ── UI WIDGET ── */
-.hero-widget {
+/* ── PHONE MOCKUP ── */
+.phone-mockup {
   flex-shrink: 0;
-  width: 290px;
-  background: rgba(20,14,6,0.88);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(200,169,110,0.2);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
   animation: widgetFloat 7s ease-in-out infinite;
+  position: relative;
+  z-index: 5;
 }
 @keyframes widgetFloat {
   0%,100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
 }
-
-.widget-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 4px;
+.pm-shell {
+  width: 220px;
+  background: #0E0A04;
+  border-radius: 36px;
+  border: 2px solid rgba(200,169,110,0.35);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.05);
+  overflow: hidden;
+  position: relative;
 }
-.widget-logo {
-  font-family: 'Playfair Display', serif;
-  color: var(--cream);
-  font-size: 14px;
-  letter-spacing: 2px;
-}
-.widget-label {
-  font-size: 10px;
-  color: var(--brown);
-  letter-spacing: 1px;
-}
-.widget-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 16px;
-  color: var(--cream);
-  margin: 14px 0 6px;
-  line-height: 1.3;
-}
-.widget-meta {
-  display: flex;
-  gap: 10px;
-  font-size: 11px;
-  color: var(--brown);
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
-.widget-meta span { display: flex; align-items: center; gap: 3px; }
-
-.widget-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-.widget-stat {
-  background: rgba(255,255,255,0.05);
-  border-radius: 10px;
-  padding: 10px 8px;
-  text-align: center;
-}
-.widget-stat-n {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  color: var(--cream);
-  line-height: 1;
-}
-.widget-stat-n.orange { color: #E8844E; }
-.widget-stat-l {
-  font-size: 10px;
-  color: var(--brown);
-  margin-top: 3px;
-}
-
-.widget-section-title {
-  font-size: 11px;
-  color: var(--brown);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.widget-section-title a {
-  color: var(--gold);
-  font-size: 10px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.widget-person {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-.widget-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #3D3020, #5A4830);
+.pm-notch {
+  height: 22px;
+  background: #0E0A04;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  flex-shrink: 0;
-  border: 1px solid rgba(200,169,110,0.3);
+  position: relative;
+  z-index: 2;
 }
-.widget-person-name { font-size: 12px; color: var(--cream); flex: 1; }
-.widget-badge-green {
-  font-size: 10px;
-  color: #6BAF7A;
-  background: rgba(58,125,68,0.2);
-  padding: 2px 7px;
-  border-radius: 5px;
+.pm-notch::after {
+  content: '';
+  width: 50px;
+  height: 6px;
+  background: #1A1208;
+  border-radius: 3px;
+  border: 1px solid rgba(200,169,110,0.15);
 }
-
-.widget-btn {
-  width: 100%;
-  padding: 11px;
-  background: var(--gold);
-  color: #1A1208;
-  border: none;
-  border-radius: 11px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: inherit;
-  margin-top: 12px;
-  transition: background .2s;
+.pm-screen {
+  background: #FAF7F2;
+  position: relative;
+  overflow: hidden;
+  height: 400px;
 }
-.widget-btn:hover { background: #E8C88E; }
+.pm-slide {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity .4s ease, transform .4s ease;
+  pointer-events: none;
+}
+.pm-slide::-webkit-scrollbar { display: none; }
+.pm-slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+.pm-topbar {
+  background: #1A1208;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.pm-topbar-logo { font-family:'Playfair Display',serif; color:#F4F0E8; font-size:13px; letter-spacing:2px; }
+.pm-topbar-sub { font-size:9px; color:#C8A96E; margin-top:1px; }
+.pm-icon-btn { font-size:14px; cursor:pointer; }
+.pm-action-row { display:flex; gap:4px; padding:8px; overflow-x:auto; scrollbar-width:none; }
+.pm-action-row::-webkit-scrollbar { display:none; }
+.pm-action-btn { white-space:nowrap; border:1px solid #E0D8C8; background:transparent; color:#2C2416; padding:5px 10px; border-radius:18px; font-size:8px; cursor:pointer; font-family:inherit; }
+.pm-action-primary { background:#1A1208; color:#F4F0E8; border-color:#1A1208; }
+.pm-action-active { border-color:#C8A96E; color:#8B6800; background:rgba(200,169,110,0.1); }
+.pm-stelle-card { margin:0 8px 6px; background:#fff; border:1px solid #E0D8C8; border-radius:10px; padding:10px; }
+.pm-stelle-name { font-size:10px; font-weight:600; color:#2C2416; margin-bottom:3px; }
+.pm-stelle-meta { font-size:7px; color:#8B7355; line-height:1.5; }
+.pm-btn-outline { flex:1; border:1px solid #E0D8C8; background:transparent; color:#2C2416; padding:4px 6px; border-radius:6px; font-size:7px; text-align:center; cursor:pointer; }
+.pm-btn-abmelden { border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:#F4F0E8; padding:3px 8px; border-radius:10px; font-size:8px; cursor:pointer; }
+.pm-kpi { background:#FAF7F2; border:1px solid #E0D8C8; border-radius:8px; padding:8px; text-align:center; }
+/* Nav dots */
+.pm-dots { display:flex; justify-content:center; gap:5px; padding:8px 0; background:#0E0A04; }
+.pm-dot { width:5px; height:5px; border-radius:50%; background:rgba(200,169,110,0.3); cursor:pointer; transition:all .2s; border:none; }
+.pm-dot.active { background:var(--gold); width:14px; border-radius:3px; }
 
 /* ── TRUST BAR ── */
 .trust-bar {
@@ -458,58 +410,129 @@
       <div class="hero-cta-hint">In 2 Minuten registrieren · Keine Kreditkarte erforderlich</div>
     </div>
 
-    <!-- Widget -->
-    <div class="hero-widget">
-      <div class="widget-header">
-        <span class="widget-logo">Civico</span>
-        <span class="widget-label">Einsatzplanung</span>
-        <span style="color:var(--brown);font-size:18px;letter-spacing:2px;line-height:1">···</span>
-      </div>
+    <!-- Phone mockup -->
+    <div class="phone-mockup" id="phoneMockup">
+      <div class="pm-shell">
+        <div class="pm-notch"></div>
+        <div class="pm-screen">
 
-      <div class="widget-title">Dorfputzete Einhausen</div>
-      <div class="widget-meta">
-        <span>📅 Sa, 27. April</span>
-        <span>🕘 9:00 – 12:00 Uhr</span>
-        <span>📍 Bürgerhaus</span>
-      </div>
+          <!-- Screen 1: Dashboard / Stellen -->
+          <div class="pm-slide active" id="slide-0">
+            <div class="pm-topbar">
+              <div><div class="pm-topbar-logo">Civico</div><div class="pm-topbar-sub">Dashboard</div></div>
+              <div style="display:flex;gap:6px;align-items:center">
+                <span class="pm-icon-btn">🔔</span>
+              </div>
+            </div>
+            <div class="pm-action-row">
+              <div class="pm-action-btn pm-action-primary">+ Neue Stelle</div>
+              <div class="pm-action-btn">👤 Profil</div>
+              <div class="pm-action-btn pm-action-active">📊 Analyse</div>
+              <div class="pm-action-btn">💬 Support</div>
+            </div>
+            <div style="font-size:7px;color:#8B7355;letter-spacing:1px;text-transform:uppercase;padding:6px 10px 3px">DEINE STELLEN (2)</div>
+            <div class="pm-stelle-card">
+              <div class="pm-stelle-name">🤝 Generationenbegegnung</div>
+              <div class="pm-stelle-meta">📍 Einhausen · 👥 17 Anmeldungen · 👁 0 Aufrufe</div>
+              <div style="display:flex;gap:4px;margin-top:6px">
+                <div class="pm-btn-outline">👥 Anmeldungen</div>
+                <div class="pm-btn-outline" style="color:#C8A96E;border-color:#C8A96E">✏️ Bearbeiten</div>
+              </div>
+            </div>
+            <div class="pm-stelle-card">
+              <div class="pm-stelle-name">🌱 Gewässermonitoring</div>
+              <div class="pm-stelle-meta">📍 Grundbach · 👥 4 Anmeldungen · 👁 34 Aufrufe</div>
+              <div style="display:flex;gap:4px;margin-top:6px">
+                <div class="pm-btn-outline">👥 Anmeldungen</div>
+                <div class="pm-btn-outline" style="color:#C8A96E;border-color:#C8A96E">✏️ Bearbeiten</div>
+              </div>
+            </div>
+          </div>
 
-      <div class="widget-stats">
-        <div class="widget-stat">
-          <div class="widget-stat-n">24</div>
-          <div class="widget-stat-l">Zugesagt</div>
+          <!-- Screen 2: Stelle Detail -->
+          <div class="pm-slide" id="slide-1">
+            <div class="pm-topbar" style="padding:8px 10px">
+              <div style="display:flex;align-items:center;gap:6px">
+                <span style="color:#8B7355;font-size:12px">←</span>
+                <span style="font-size:10px;font-weight:500;color:#F4F0E8">Stelle Details</span>
+              </div>
+              <div class="pm-btn-abmelden">Abmelden</div>
+            </div>
+            <div style="background:#F4F0E8;border:1px solid #E0D8C8;border-radius:8px;margin:8px;padding:10px">
+              <div style="font-size:11px;font-weight:600;color:#2C2416;margin-bottom:3px">Generationenbegegnung</div>
+              <div style="font-size:7px;color:#8B7355">📍 Einhausen &nbsp;·&nbsp; 👁 0 Aufrufe</div>
+            </div>
+            <div style="margin:0 8px;border:1px solid #E0D8C8;border-radius:8px;padding:10px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
+                <div style="font-size:8px;color:#2C2416;font-weight:500">📅 Fr., 03.04. · 18:01 – 20:01</div>
+                <span style="font-size:7px;color:#5B9BD5;font-weight:500">Bevorstehend</span>
+              </div>
+              <div style="font-size:7px;color:#3A7D44;margin-bottom:7px">2 Plätze frei</div>
+              <div style="display:flex;gap:4px;margin-bottom:10px">
+                <div style="flex:1;border:1px solid #E0D8C8;border-radius:5px;padding:4px;font-size:7px;text-align:center;color:#2C2416">📅 Verschieben</div>
+                <div style="flex:1;border:1px solid #E85C5C;border-radius:5px;padding:4px;font-size:7px;text-align:center;color:#E85C5C">✕ Absagen</div>
+              </div>
+              <div style="font-size:7px;color:#8B7355;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">ANGEMELDETE (17)</div>
+              ${['Lucas Wimmer','Anna Müller','Thomas Becker','Sabine Klein','Max Hofmann'].map(n=>`
+                <div style="display:flex;align-items:center;gap:5px;padding:4px 0;border-bottom:1px solid #F0EBE0">
+                  <div style="width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#3D3020,#5A4830);display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0">👤</div>
+                  <div style="font-size:8px;color:#2C2416;flex:1">${n}</div>
+                  <span style="font-size:9px;color:#8B7355">›</span>
+                </div>`).join('')}
+            </div>
+          </div>
+
+          <!-- Screen 3: Analyse -->
+          <div class="pm-slide" id="slide-2">
+            <div class="pm-topbar">
+              <div><div class="pm-topbar-logo">Civico</div><div class="pm-topbar-sub">Analyse</div></div>
+            </div>
+            <div style="display:flex;gap:3px;background:#EDE8DE;border-radius:7px;padding:3px;margin:8px">
+              <div style="flex:1;background:#FAF7F2;border-radius:5px;padding:4px;text-align:center;font-size:7px;font-weight:500;color:#2C2416">📊 Übersicht</div>
+              <div style="flex:1;padding:4px;text-align:center;font-size:7px;color:#8B7355">👥 Follower</div>
+              <div style="flex:1;padding:4px;text-align:center;font-size:7px;color:#8B7355">🌱 Stellen</div>
+            </div>
+            <div style="font-size:6px;color:#8B7355;letter-spacing:1px;text-transform:uppercase;padding:0 10px 5px">GESAMTÜBERSICHT (INKL. GELÖSCHTE STELLEN)</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:0 8px;margin-bottom:8px">
+              <div class="pm-kpi"><div style="font-size:16px;margin-bottom:2px">👁️</div><div style="font-size:15px;font-weight:700;color:#5B9BD5;font-family:'Playfair Display',serif">142</div><div style="font-size:6px;color:#8B7355">Aufrufe</div></div>
+              <div class="pm-kpi"><div style="font-size:16px;margin-bottom:2px">✅</div><div style="font-size:15px;font-weight:700;color:#3A7D44;font-family:'Playfair Display',serif">21</div><div style="font-size:6px;color:#8B7355">Anmeldungen</div></div>
+              <div class="pm-kpi"><div style="font-size:16px;margin-bottom:2px">🎯</div><div style="font-size:15px;font-weight:700;color:#6BAF7A;font-family:'Playfair Display',serif">17</div><div style="font-size:6px;color:#8B7355">Erschienen</div></div>
+              <div class="pm-kpi"><div style="font-size:16px;margin-bottom:2px">❌</div><div style="font-size:15px;font-weight:700;color:#E85C5C;font-family:'Playfair Display',serif">1</div><div style="font-size:6px;color:#8B7355">Nicht erschienen</div></div>
+            </div>
+            <div style="margin:0 8px;background:#FAF7F2;border:1px solid #E0D8C8;border-radius:8px;padding:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <span style="font-size:7px;font-weight:500;color:#2C2416">🎯 Erscheinensquote</span>
+                <span style="font-size:9px;font-weight:700;color:#3A7D44">81%</span>
+              </div>
+              <div style="height:5px;background:#EDE8DE;border-radius:3px;overflow:hidden">
+                <div style="width:81%;height:100%;background:#3A7D44;border-radius:3px"></div>
+              </div>
+              <div style="font-size:6px;color:#3A7D44;margin-top:4px">🌟 Sehr gut!</div>
+            </div>
+          </div>
+
         </div>
-        <div class="widget-stat">
-          <div class="widget-stat-n orange">3</div>
-          <div class="widget-stat-l">Abgesagt</div>
+        <div class="pm-dots">
+          <button class="pm-dot active" onclick="goToSlide(0)"></button>
+          <button class="pm-dot" onclick="goToSlide(1)"></button>
+          <button class="pm-dot" onclick="goToSlide(2)"></button>
         </div>
-        <div class="widget-stat">
-          <div class="widget-stat-n">12</div>
-          <div class="widget-stat-l">Offen</div>
+        <div style="background:#0E0A04;padding-bottom:10px;display:flex;justify-content:center">
+          <div style="width:70px;height:4px;background:rgba(200,169,110,0.25);border-radius:2px"></div>
         </div>
       </div>
-
-      <div class="widget-section-title">
-        Helfer <a href="#">Alle anzeigen</a>
-      </div>
-
-      <div class="widget-person">
-        <div class="widget-avatar">👩</div>
-        <span class="widget-person-name">Anna Müller</span>
-        <span class="widget-badge-green">Zugesagt</span>
-      </div>
-      <div class="widget-person">
-        <div class="widget-avatar">👨</div>
-        <span class="widget-person-name">Thomas Becker</span>
-        <span class="widget-badge-green">Zugesagt</span>
-      </div>
-      <div class="widget-person">
-        <div class="widget-avatar">👩</div>
-        <span class="widget-person-name">Sabine Klein</span>
-        <span class="widget-badge-green">Zugesagt</span>
-      </div>
-
-      <button class="widget-btn">Erinnerung senden</button>
     </div>
+    function goToSlide(n) {
+      document.querySelectorAll('.pm-slide').forEach((s,i) => s.classList.toggle('active', i===n));
+      document.querySelectorAll('.pm-dot').forEach((d,i) => d.classList.toggle('active', i===n));
+      currentSlide = n;
+    }
+    function nextSlide() { goToSlide((currentSlide + 1) % totalSlides); }
+    autoTimer = setInterval(nextSlide, 3500);
+    document.getElementById('phoneMockup').addEventListener('click', () => {
+      clearInterval(autoTimer); nextSlide(); autoTimer = setInterval(nextSlide, 3500);
+    });
+    </script>
   </div>
 
   <!-- Trust Bar -->
