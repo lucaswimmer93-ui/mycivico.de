@@ -7,7 +7,6 @@
 <meta name="description" content="Datenschutzerklärung von Civico">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
@@ -17,18 +16,137 @@
   <div class="nav-links">
     <a href="index.html" style="cursor:pointer">← Zurück</a>
   </div>
-  <button class="nav-cta" onclick="window.location.href='verein-login.html'">Anmelden →</button>
+  <button class="nav-cta" onclick="window.location.href='https://app.mycivico.de'">Anmelden →</button>
 </nav>
 <div id="recht-datenschutz" class="recht-section visible">
   <div class="section-tag">Rechtliches</div>
   <h2 class="section-title">Datenschutzerklärung</h2>
   <div style="font-size:14px;color:var(--brown);line-height:2">
-    <p><strong>Verantwortlicher:</strong> Lucas Wimmer, Einhausen – <a href="/cdn-cgi/l/Lucaswimmer@mycivico.de" class="__cf_email__" data-cfemail="e2ae97818391cf958b8f8f8790a28a8d968f838b8ecc8687">[email&#160;protected]</a></p>
-    <p style="margin-top:12px"><strong>Erhobene Daten:</strong> Name, E-Mail, PLZ sowie Angaben zu Ehrenamtseinsätzen. Keine Weitergabe an Dritte.</p>
-    <p style="margin-top:12px"><strong>Tracking:</strong> Keine Tracking-Cookies von Drittanbietern. Anonymisierte Nutzungsstatistiken werden intern zur Verbesserung genutzt.</p>
-    <p style="margin-top:12px"><strong>Datenspeicherung:</strong> EU-Server (Supabase, Frankfurt), DSGVO-konform.</p>
-    <p style="margin-top:12px"><strong>Ihre Rechte:</strong> Auskunft, Berichtigung, Löschung, Widerspruch. Kontakt: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f6ba83959785db819f9b9b9384b69e99829b979f9ad89293">[email&#160;protected]</a></p>
-  
+
+    <p style="margin-top:24px"><strong>1. Verantwortlicher</strong></p>
+    <p style="margin-top:8px">Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO):</p>
+    <p style="margin-top:8px">
+      Lucas Wimmer / Civico<br>
+      Rheinstraße 26<br>
+      64683 Einhausen<br>
+      <a href="mailto:Lucaswimmer@mycivico.de" style="color:var(--gold)">Lucaswimmer@mycivico.de</a>
+    </p>
+
+    <p style="margin-top:24px"><strong>2. Allgemeine Hinweise zur Datenverarbeitung</strong></p>
+    <p style="margin-top:8px">Wir verarbeiten personenbezogene Daten der Nutzer ausschließlich im Rahmen der gesetzlichen Bestimmungen der DSGVO.</p>
+    <p style="margin-top:8px">Personenbezogene Daten sind alle Informationen, die sich auf eine identifizierte oder identifizierbare Person beziehen.</p>
+
+    <p style="margin-top:24px"><strong>3. Hosting</strong></p>
+    <p style="margin-top:8px">Unsere Anwendung wird über den Anbieter Vercel bereitgestellt.</p>
+    <p style="margin-top:8px">Dabei können technische Daten wie:</p>
+    <ul style="margin-left:20px;margin-top:4px">
+      <li>IP-Adresse</li>
+      <li>Zugriffsdaten</li>
+      <li>Verbindungsdaten</li>
+    </ul>
+    <p style="margin-top:8px">verarbeitet werden.</p>
+    <p style="margin-top:8px">Eine Datenübertragung in Drittländer (z. B. USA) kann nicht ausgeschlossen werden. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an stabiler und sicherer Bereitstellung der Plattform).</p>
+
+    <p style="margin-top:24px"><strong>4. Domain-Hosting</strong></p>
+    <p style="margin-top:8px">Die Domain wird über IONOS bereitgestellt.</p>
+    <p style="margin-top:8px">Dabei werden technische Verbindungsdaten verarbeitet.</p>
+
+    <p style="margin-top:24px"><strong>5. Backend und Datenbank (Supabase)</strong></p>
+    <p style="margin-top:8px">Für die Bereitstellung unserer Plattform nutzen wir Supabase.</p>
+    <p style="margin-top:8px">Dabei werden folgende Daten verarbeitet:</p>
+    <ul style="margin-left:20px;margin-top:4px">
+      <li>Benutzerkonten (Name, E-Mail-Adresse)</li>
+      <li>Einsätze und Teilnahmeinformationen</li>
+      <li>Kommunikationsdaten (Nachrichten)</li>
+    </ul>
+    <p style="margin-top:8px">Die Verarbeitung erfolgt zur Bereitstellung der Plattformfunktionen gemäß Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</p>
+
+    <p style="margin-top:24px"><strong>6. Benutzerkonten</strong></p>
+    <p style="margin-top:8px">Bei der Registrierung werden folgende Daten erhoben:</p>
+    <ul style="margin-left:20px;margin-top:4px">
+      <li>Name</li>
+      <li>E-Mail-Adresse</li>
+    </ul>
+    <p style="margin-top:8px">Diese Daten werden verwendet zur:</p>
+    <ul style="margin-left:20px;margin-top:4px">
+      <li>Erstellung und Verwaltung des Nutzerkontos</li>
+      <li>Organisation von Einsätzen</li>
+      <li>Kommunikation innerhalb der Plattform</li>
+    </ul>
+
+    <p style="margin-top:24px"><strong>7. Plattformfunktion und Datenweitergabe</strong></p>
+    <p style="margin-top:8px">Civico ist eine Plattform zur Organisation von ehrenamtlichen Einsätzen.</p>
+    <p style="margin-top:8px">Dabei werden Daten zwischen Nutzern sichtbar gemacht, insbesondere:</p>
+    <ul style="margin-left:20px;margin-top:4px">
+      <li>Zuordnung von Nutzern zu Vereinen oder Gemeinden</li>
+      <li>Anzeige von angemeldeten Helfern für Einsätze (zeitlich begrenzt)</li>
+    </ul>
+    <p style="margin-top:8px">Nach Abschluss eines Einsatzes werden personenbezogene Detaildaten reduziert und nicht dauerhaft öffentlich angezeigt.</p>
+
+    <p style="margin-top:24px"><strong>8. Verarbeitung von Verhaltensdaten</strong></p>
+    <p style="margin-top:8px">Im Rahmen der Nutzung der Plattform werden folgende Daten verarbeitet:</p>
+    <ul style="margin-left:20px;margin-top:4px">
+      <li>Teilnahme an Einsätzen</li>
+      <li>Absagen</li>
+      <li>Nicht-Erscheinen (No-Show)</li>
+    </ul>
+    <p style="margin-top:8px">Diese Daten werden verwendet zur:</p>
+    <ul style="margin-left:20px;margin-top:4px">
+      <li>Organisation von Einsätzen</li>
+      <li>Verbesserung der Plattform</li>
+      <li>Erstellung statistischer Auswertungen</li>
+    </ul>
+
+    <p style="margin-top:24px"><strong>9. Statistische Auswertungen und CSR-Berichte</strong></p>
+    <p style="margin-top:8px">Zur Analyse und Verbesserung der Plattform werden Daten in aggregierter Form ausgewertet.</p>
+    <p style="margin-top:8px">Hierzu zählen insbesondere:</p>
+    <ul style="margin-left:20px;margin-top:4px">
+      <li>Anzahl von Einsätzen</li>
+      <li>Anzahl von Helfern</li>
+      <li>Teilnahmequoten</li>
+      <li>Gesamtstunden</li>
+    </ul>
+    <p style="margin-top:8px">Diese Auswertungen erfolgen in der Regel in aggregierter oder teilweise anonymisierter Form. Ein direkter Rückschluss auf einzelne Personen wird dabei soweit wie möglich vermieden.</p>
+
+    <p style="margin-top:24px"><strong>10. Kommunikation innerhalb der Plattform</strong></p>
+    <p style="margin-top:8px">Die Plattform bietet Funktionen zur internen Kommunikation (z. B. Nachrichten zwischen Nutzern).</p>
+    <p style="margin-top:8px">Dabei werden verarbeitet:</p>
+    <ul style="margin-left:20px;margin-top:4px">
+      <li>Inhalte von Nachrichten</li>
+      <li>Zeitpunkt der Kommunikation</li>
+      <li>beteiligte Nutzer</li>
+    </ul>
+    <p style="margin-top:8px">Diese Daten werden zur Bereitstellung der Kommunikationsfunktion verarbeitet.</p>
+
+    <p style="margin-top:24px"><strong>11. Push-Benachrichtigungen</strong></p>
+    <p style="margin-top:8px">Die Plattform kann Push-Benachrichtigungen versenden, z. B.:</p>
+    <ul style="margin-left:20px;margin-top:4px">
+      <li>Erinnerungen an Einsätze</li>
+      <li>organisatorische Hinweise</li>
+    </ul>
+    <p style="margin-top:8px">Bei Nutzung im Browser können hierfür technische Dienste des jeweiligen Browsers verwendet werden.</p>
+    <p style="margin-top:8px">Bei zukünftiger Nutzung mobiler Anwendungen können Push-Dienste von Apple oder Google zum Einsatz kommen.</p>
+
+    <p style="margin-top:24px"><strong>12. Speicherdauer</strong></p>
+    <p style="margin-top:8px">Personenbezogene Daten werden nur so lange gespeichert, wie dies für die jeweiligen Zwecke erforderlich ist.</p>
+    <p style="margin-top:8px">Daten im Zusammenhang mit Einsätzen werden nach Abschluss reduziert oder aggregiert.</p>
+
+    <p style="margin-top:24px"><strong>13. Rechte der betroffenen Personen</strong></p>
+    <p style="margin-top:8px">Nutzer haben das Recht auf:</p>
+    <ul style="margin-left:20px;margin-top:4px">
+      <li>Auskunft (Art. 15 DSGVO)</li>
+      <li>Berichtigung (Art. 16 DSGVO)</li>
+      <li>Löschung (Art. 17 DSGVO)</li>
+      <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+      <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+    </ul>
+
+    <p style="margin-top:24px"><strong>14. Widerspruchsrecht</strong></p>
+    <p style="margin-top:8px">Nutzer haben das Recht, der Verarbeitung ihrer Daten jederzeit zu widersprechen, sofern diese auf Art. 6 Abs. 1 lit. f DSGVO beruht.</p>
+
+    <p style="margin-top:24px"><strong>15. Datensicherheit</strong></p>
+    <p style="margin-top:8px">Wir setzen technische und organisatorische Maßnahmen ein, um personenbezogene Daten vor Verlust, Manipulation und unberechtigtem Zugriff zu schützen.</p>
+
   </div>
 </div>
 <footer>
@@ -38,8 +156,7 @@
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
       <a href="agb.html">AGB</a>
-      <a href="/cdn-cgi/l/Lucaswimmer@mycivico.de #79350c1a180a540e1014141c0b3911160d14181015571d1c">Kontakt</a>
-      <a onclick="openModal('admin-login')">Admin</a>
+      <a href="mailto:Lucaswimmer@mycivico.de">Kontakt</a>
     </div>
   </div>
   <div class="footer-copy">© 2025 Civico – Lucas Wimmer, Einhausen. Alle Rechte vorbehalten.</div>
